@@ -15,49 +15,45 @@
 
 ### Run app service in local
 
-#### Run app server by downloading docker image
-you can download docker image from docker hub
+  #### Run app server by downloading docker image
+  you can download docker image from docker hub
 
-```
-docker pull jerryyanwang/movieapp
-docker run --rm -it -p 3000:3000/tcp jerryyanwang/movieapp:latest
-open http://localhost:3000/#/movieResource
-```
+  ```
+  docker pull jerryyanwang/movieapp
+  docker run --rm -it -p 3000:3000/tcp jerryyanwang/movieapp:latest
+  open http://localhost:3000/#/movieResource
+  ```
 
-#### Run app server by docker compose
-Pull whole app from github and access root directory of app
-you can open `docker-compose.yml` file to check relevant docker configuration
+  #### Run app server by docker compose
+  Pull whole app from github and access root directory of app
+  you can open `docker-compose.yml` file to check relevant docker configuration
 
-```
-docker-compose up
-open http://localhost:3000/#/movieResource
+  ```
+  docker-compose up
+  open http://localhost:3000/#/movieResource
 
-docker-compose stop
-```
+  docker-compose stop
+  ```
 
 ### Development by local
 pull whole app from github and access root directory of app
 
-#### Run Node server
+  #### Run Node server
 
-```
-cd ./client
-yarn
-yarn build
-cd ..
-yarn
-yarn start
-open http://localhost:3000
-```
+  ```
+  yarn
+  yarn start
+  open http://localhost:3000
+  ```
 
-#### Run Client server
+  #### Run Client server
 
-```
-cd ./client
-yarn
-yarn start
-open http://localhost:3000/#/movieResource
-```
+  ```
+  cd ./client
+  yarn
+  yarn start
+  open http://localhost:3000/#/movieResource
+  ```
 
 ###  Application Architecture
 
