@@ -55,7 +55,7 @@ pull whole app from github and access root directory of app
   open http://localhost:3000/#/movieResource
   ```
 
-###  Application Architecture
+###  Application Data Flow
 
 ```mermaid
 stateDiagram
