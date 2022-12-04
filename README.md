@@ -15,17 +15,16 @@
 
 ### Run app service in local
 
-# Run app server by downloading docker image
+#### Run app server by downloading docker image
 you can download docker image from docker hub
 
 ```
 docker pull jerryyanwang/movieapp
 docker run --rm -it -p 3000:3000/tcp jerryyanwang/movieapp:latest
 open http://localhost:3000/#/movieResource
-
 ```
 
-# Run app server by docker compose
+#### Run app server by docker compose
 Pull whole app from github and access root directory of app
 you can open `docker-compose.yml` file to check relevant docker configuration
 
@@ -39,7 +38,7 @@ docker-compose stop
 ### Development by local
 pull whole app from github and access root directory of app
 
-# Run Node server
+#### Run Node server
 
 ```
 cd ./client
@@ -51,7 +50,7 @@ yarn start
 open http://localhost:3000
 ```
 
-# Run Client server
+#### Run Client server
 
 ```
 cd ./client
@@ -60,16 +59,25 @@ yarn start
 open http://localhost:3000/#/movieResource
 ```
 
+###  Application Architecture
+
+```mermaid
+stateDiagram
+    Server(NodeJS) --> Client(ReactApp)
+    Client(ReactApp) --> IndexedDB(Dexie)
+    IndexedDB(Dexie) --> Client(ReactApp)
+```
+
 ###  Pre-commit Hooks
 We set up two git pre-commit hooks:
 
 1. `prettier` - this will check the js file and formate it automatically.
 2. `@typescript-eslint` - this will check the ts file if there have any linter problems.
 
+
 ### Front-end File Structure
 ```
 └── /src
-  ├── /assets - Contains static assets such as images, svgs, company logo etc.
   ├── /components - reusable components like navigation bar, buttons, forms
   ├── /hooks - Contains common hook function
   ├── /providers - Contains all provider context
