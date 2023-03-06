@@ -34,10 +34,9 @@ const CreateComment = ({ onClose, movieID }: CreateCommentProps): JSX.Element =>
   const { data, refetch } = useGetOne(resourceName, { id: movieID });
   const postSave = useCallback(
     (comment: FieldValues) => {
-      const comments = [...data.comments, ...[comment]];
       create(
         resourceName,
-        { data: { ...data, comments } },
+        { data: { id: data.id, comments: comment } },
         {
           onSuccess: () => {
             refetch();

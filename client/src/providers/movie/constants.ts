@@ -1,5 +1,5 @@
 export type MovieObject = {
-  id?: number;
+  _id?: string;
   film: string;
   genre: string;
   lead_studio: string;
@@ -19,4 +19,4 @@ export type AddResult = {
   added: MovieObject[];
 };
 
-export const BASE_URL = 'http://127.0.0.1:3001';
+export const BASE_URL = 'http://127.0.0.1:4000';

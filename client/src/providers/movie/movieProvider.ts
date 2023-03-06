@@ -7,38 +7,41 @@ import {
   GetOneResult,
   RaRecord,
 } from 'react-admin';
-import MovieDB from '../../indexedDB';
 import { pageSortList } from './utils';
-
-const movieDB = new MovieDB('movie');
-(async () => {
-  await movieDB.initDB();
-})();
+import { BASE_URL } from './constants';
 
 export const provider: DataProvider = {
-  getList: async <MovieObject extends RaRecord>(
+  getList: async <T extends RaRecord = RaRecord>(
     resource: string,
     params: GetListParams
-  ): Promise<GetListResult<MovieObject>> => {
-    const movies: MovieObject[] = (await movieDB.getMovies(
-      params.filter.q
-    )) as unknown as MovieObject[];
+  ): Promise<GetListResult<T>> => {
+    const response = await fetch(`${BASE_URL}/movies`);
+    const data = await response.json();
     return {
-      data: pageSortList(movies, params),
-      total: movies.length,
+      data: pageSortList(data, params),
+      total: data.length,
     };
   },
   getMany: async () => Promise.reject(),
-  getOne: async <MovieObject extends RaRecord>(
+  getOne: async <T extends RaRecord>(
     resource: string,
     params: GetOneParams
-  ): Promise<GetOneResult<MovieObject>> => {
-    const data: MovieObject = (await movieDB.getMovieByID(params.id)) as unknown as MovieObject;
+  ): Promise<GetOneResult<T>> => {
+    const response = await fetch(`${BASE_URL}/movies/${params.id}`);
+    const data = await response.json();
     return { data };
   },
   getManyReference: async () => Promise.reject(),
   create: async (resource: string, params: CreateParams) => {
-    await movieDB.updateMovies([params.data]);
+    try {
+      await fetch(`${BASE_URL}/movies/${params.data.id}/comments`, {
+        method: 'POST',
+        body: JSON.stringify(params.data.comments),
+        headers: { 'Content-Type': 'application/json' },
+      });
+    } catch (error) {
+      console.log('Error: ', error);
+    }
     return { data: params.data };
   },
   update: async () => Promise.reject(),
