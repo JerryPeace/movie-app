@@ -7,7 +7,7 @@ import {
   GetOneResult,
   RaRecord,
 } from 'react-admin';
-import { pageSortList } from './utils';
+import { pageSortList, filterList } from './utils';
 import { BASE_URL } from './constants';
 
 export const provider: DataProvider = {
@@ -18,7 +18,7 @@ export const provider: DataProvider = {
     const response = await fetch(`${BASE_URL}/movies`);
     const data = await response.json();
     return {
-      data: pageSortList(data, params),
+      data: pageSortList(filterList(data, params, 'film'), params),
       total: data.length,
     };
   },
